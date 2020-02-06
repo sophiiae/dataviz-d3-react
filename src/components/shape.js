@@ -1,13 +1,10 @@
-import React, { Component } from 'react'
-import './App.css'
+import React, { useEffect } from 'react'
 import * as d3 from "d3";
 
-class Shape extends Component {
-  componentDidMount() {
-    this.createShape()
-  }
+const Shape = () => {
+  useEffect(() => createShape())
 
-  createShape() { 
+  const createShape = () => { 
     var lineGenerator = d3.line();
     var radialLineGenerator = d3.radialLine();
     var areaGenerator = d3.area()
@@ -35,16 +32,16 @@ class Shape extends Component {
     var radialLine = radialLineGenerator(points);
     var area = areaGenerator(points);
       
-    d3.select('g')
+    d3.select('svg')
       .append('path')
       .attr('d', area);
   }
 
-  render(){
-    return <svg width="700" height="200">
+  return (
+    <svg width="700" height="200">
       <g></g>
     </svg>
-  }
+  )
 }
 
 export default Shape;
