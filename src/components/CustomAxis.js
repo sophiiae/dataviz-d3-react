@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import * as d3 from 'd3'
 import data from '../data/data.csv'
-import { scaleLinear } from 'd3'
 
-const BarChartCSV = () => {
-  useEffect(() => createBarChartCSV())
+const CustomAxis = () => {
+  useEffect(() => createCustomAxis())
 
   const render = (data, svg) => {
     const width = +svg.attr('width');
@@ -13,15 +12,16 @@ const BarChartCSV = () => {
     const yValue = d => d.country;
 
     const margin = {
-      top: 20,
+      top: 60,
       right: 20,
-      bottom: 20,
-      left: 100
+      bottom: 60,
+      left: 200
     };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    const xScale = scaleLinear()
+    // define scale for data
+    const xScale = d3.scaleLinear()
       .domain([0, d3.max(data, xValue)])
       .range([0, innerWidth])
     
@@ -30,13 +30,33 @@ const BarChartCSV = () => {
       .range([0, innerHeight])
       .padding(0.2);
 
+    // add a group
     const g = svg.append('g')
       .attr('transform', `translate(${ margin.left }, ${ margin.top })`)
     
-    g.append('g').call(d3.axisLeft(yScale));
-    g.append('g').call(d3.axisBottom(xScale))
+    // draw x-axis
+    const xAxis = d3.axisBottom(xScale)
+      .tickFormat(d3.format('.2s'))
+      .tickSize(-innerHeight);
+
+    g.append('g')
+      .call(d3.axisLeft(yScale))
+      .selectAll('.domain, .tick line')
+        .remove();
+
+    const xAxisG = g.append('g').call(xAxis)
       .attr('transform', `translate(0, ${ innerHeight })`);
 
+    xAxisG.select('.domain')
+        .remove();
+    
+    xAxisG.append('text')
+      .attr('y', 50)
+      .attr('x', innerWidth / 2)
+      .attr('fill', 'black')
+      .text('Population');
+
+    // add bars
     g.selectAll('rect')
       .data(data)
       .enter()
@@ -47,23 +67,34 @@ const BarChartCSV = () => {
       .attr('fill', 'steelblue')
     
     g.selectAll('text')
-      .attr('font-size', 14)
+      .attr('font-size', 16)
+
+    // add chart title
+    g.append('text')
+      .text('Top 10 Most Populous Countries')
+      .attr('y', -10)
+      .attr('x', innerWidth / 4)
+      .attr('font-family', 'sans-serif')
+      .attr('font-size', 28)
+
+    g.selectAll('.tick text')
+      .attr('fill', '#635F5D')
   }
 
-  const createBarChartCSV = () => {
+  const createCustomAxis = () => {
     const svg = d3.select('svg');
 
     d3.csv(data).then(data => {
-      data.forEach(d => d.population = +d.population * 1000);
+      data.forEach(d => d.population = +d.population);
       render(data, svg);
     })
   }
 
   return (
-    <svg width="960" height="500">
+    <svg width="960" height="600">
       <g></g>
     </svg>
   )
 }
 
-export default BarChartCSV;
+export default CustomAxis;
