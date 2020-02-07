@@ -1,9 +1,9 @@
 import React from 'react';
-import Shape from './components/shape'
-import BarChartSVG from './components/BarChartCSV'
-import CustomAxis from './components/CustomAxis'
-import ScatterChart from './components/ScatterChart'
-import LineChart from './components/LineChart'
+import Shape from './charts/shape'
+import BarChartSVG from './charts/BarChartCSV'
+import CustomAxis from './charts/CustomAxis'
+import ScatterChart from './charts/ScatterChart'
+import LineChart from './charts/LineChart'
 
 function App() {
   return (
