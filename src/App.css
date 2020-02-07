@@ -41,3 +41,10 @@ text {
   font-size: 3em;
   fill: rgb(55, 52, 50);
 }
+
+.line-path {
+  fill: none;
+  stroke: rgb(70, 33, 123);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}

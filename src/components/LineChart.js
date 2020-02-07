@@ -1,21 +1,31 @@
 import React, { useEffect } from 'react'
 import '../App.css'
-import * as d3 from 'd3'
+import { 
+  csv, 
+  select,
+  scaleLinear,
+  extent,
+  axisBottom,
+  axisLeft,
+  scaleTime,
+  line,
+  curveBasis
+} from 'd3'
 
-const ScatterChart = () => {
-  useEffect(() => createScatterChart())
+const LineChart = () => {
+  useEffect(() => createLineChart())
 
   const render = (data, svg) => {
-    const title = 'Cars: Horsepower vs. Weight';
+    const title = 'A Week in San Francisco';
     const width = +svg.attr('width');
     const height = +svg.attr('height');
 
-    const xValue = d => d.horsepower;
-    const xAxisLabel = 'Horsepower';
+    const xValue = d => d.timestamp;
+    const xAxisLabel = 'Time';
     
-    const yValue = d => d.weight;
-    const circleRadius = 10;
-    const yAxisLabel = 'Weight';
+    const yValue = d => d.temperature;
+    const circleRadius = 6;
+    const yAxisLabel = 'Temperature';
 
     const margin = {
       top: 80,
@@ -28,13 +38,13 @@ const ScatterChart = () => {
 
     // Use linear scale for data 
     // d3.extent returns min and max value in the array
-    const xScale = d3.scaleLinear()
-      .domain(d3.extent(data, xValue))
+    const xScale = scaleTime()
+      .domain(extent(data, xValue))
       .range([0, innerWidth])
       .nice();
 
-    const yScale = d3.scaleLinear()
-      .domain(d3.extent(data, yValue))
+    const yScale = scaleLinear()
+      .domain(extent(data, yValue))
       .range([innerHeight, 0])
       .nice();
 
@@ -48,6 +58,17 @@ const ScatterChart = () => {
       .attr('cy', d => yScale(yValue(d)))
       .attr('cx', d => xScale(xValue(d)))
       .attr('r', circleRadius);
+    
+    // defin line generator
+    const lineGenerator = line()
+      .x(d => xScale(xValue(d)))
+      .y(d => yScale(yValue(d)))
+      .curve(curveBasis);
+    
+    // draw lines
+    g.append('path')
+      .attr('class', 'line-path')
+      .attr('d', lineGenerator(data));
 
     // add chart title
     g.append('text')
@@ -56,7 +77,7 @@ const ScatterChart = () => {
       .attr('y', -20);
 
     // draw x-aixs
-    const xAxis = d3.axisBottom(xScale)
+    const xAxis = axisBottom(xScale)
       .tickSize(-innerHeight)
       .tickPadding(15);
     
@@ -72,13 +93,12 @@ const ScatterChart = () => {
       .text(xAxisLabel)
       .attr('fill', 'black')
       .attr('class', 'axis-label')
-      .attr('y', 80)
+      .attr('y', 70)
       .attr('x', innerWidth / 2)
 
     // draw y-aixs
-    const yAxis = d3.axisLeft(yScale)
+    const yAxis = axisLeft(yScale)
       .tickSize(-innerWidth)
-      .tickFormat(d3.format('.2s'))
       .tickPadding(15);
 
     const yAxisG = g.append('g').call(yAxis);
@@ -92,24 +112,18 @@ const ScatterChart = () => {
       .attr('class', 'axis-label')
       .attr('fill', 'black')
       .attr('transform', 'rotate(-90)')
-      .attr('y', -90)
-      .attr('x', -innerHeight / 2)
-      .attr('text-anchor', 'middle');
+      .attr('y', -70)
+      .attr('x', -innerHeight / 2);
   }
 
-  const createScatterChart = () => {
-    const svg = d3.select('svg');
+  const createLineChart = () => {
+    const svg = select('svg');
 
-    d3.csv("https://vizhub.com/curran/datasets/auto-mpg.csv").then(data => {
+    csv('https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv').then(data => {
       data.forEach(d => {
-        d.mpg = +d.mpg;
-        d.cylinders = +d.cylinders;
-        d.displacement = +d.displacement;
-        d.horsepower = +d.horsepower;
-        d.weight = +d.weight;
-        d.acceleration = +d.acceleration;
-        d.year = +d.year; 
-      });
+        d.temperature = +d.temperature;
+        d.timestamp = new Date(d.timestamp);
+      })
       render(data, svg);
     })
   }
@@ -118,6 +132,6 @@ const ScatterChart = () => {
     <svg width="960" height="500">
     </svg>
   )
-};
+}
 
-export default ScatterChart;
+export default LineChart;

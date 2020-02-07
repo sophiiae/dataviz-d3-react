@@ -3,6 +3,7 @@ import Shape from './components/shape'
 import BarChartSVG from './components/BarChartCSV'
 import CustomAxis from './components/CustomAxis'
 import ScatterChart from './components/ScatterChart'
+import LineChart from './components/LineChart'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       {/* <BarChartSVG /> */}
       {/* <CustomAxis /> */}
       {/* <ScatterChart /> */}
+      <LineChart />
     </div>
   );
 }
