@@ -1,5 +1,5 @@
 import React from 'react';
-import Shape from './charts/shape'
+import Shape from './basic/shape'
 import BarChartSVG from './charts/BarChartCSV'
 import CustomAxis from './charts/CustomAxis'
 import ScatterChart from './charts/ScatterChart'
