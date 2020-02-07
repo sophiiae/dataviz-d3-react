@@ -48,3 +48,17 @@ text {
   stroke-width: 3;
   stroke-linejoin: round;
 }
+
+.country {
+  fill: rgb(61, 128, 60);
+  stroke: rgb(87, 66, 40);
+  stroke-opacity: 0.1;
+}
+
+.country:hover {
+  fill: rgb(228, 207, 119);
+}
+
+.sphere {
+  fill: #3f518b;
+}

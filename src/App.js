@@ -4,17 +4,18 @@ import BarChartSVG from './charts/BarChartCSV'
 import CustomAxis from './charts/CustomAxis'
 import ScatterChart from './charts/ScatterChart'
 import LineChart from './charts/LineChart'
+import WorldMap from './maps/WorldMap'
 
 function App() {
   return (
     <div className="App">
-      <div className="App-header">Scatter Chart</div>
       {/* <Shape /> */}
       {/* <BarChart /> */}
       {/* <BarChartSVG /> */}
       {/* <CustomAxis /> */}
       {/* <ScatterChart /> */}
-      <LineChart />
+      {/* <LineChart /> */}
+      <WorldMap />
     </div>
   );
 }
