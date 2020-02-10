@@ -33,7 +33,11 @@ const BarChart = () => {
       .attr("y", (d, i) => height - (10 * d) - 3);
   }
 
-  return <svg width="700" height="300"></svg>
+  return (
+    <div>
+      <svg width="700" height="300"></svg>
+    </div>
+  )
 }
 
 export default BarChart

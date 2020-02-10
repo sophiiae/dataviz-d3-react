@@ -60,9 +60,9 @@ const BarChartCSV = () => {
   }
 
   return (
-    <svg width="960" height="500">
-      <g></g>
-    </svg>
+    <div>
+      <svg width="960" height="500"></svg>
+    </div>
   )
 }
 
