@@ -13,6 +13,7 @@ import ScatterChart from './charts/ScatterChart';
 import LineChart from './charts/LineChart';
 import WorldMap from './maps/WorldMap';
 import ChoroplethMap from './maps/ChoroplethMap'
+import Demo from './rsm/Demo'
 import './App.css'
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
             <ChoroplethMap />
           </Route>
           <Route path="/rsm">
-            <ChoroplethMap />
+            <Demo />
           </Route>
         </Switch>
         {/* <Shape /> */}
