@@ -2,6 +2,29 @@ body {
   margin: 0px;
   overflow: hidden;
 }
+.topnav {
+  overflow: hidden;
+  background-color: #262c41;
+}
+
+.topnav a{
+  float: left;
+  color: whitesmoke;
+  text-align: center;
+  padding: 16px 30px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}
+
+.topnav a:hover {
+  background-color: #3f518b;
+}
+
+.topnav a.active {
+  background-color: aliceblue;
+  color: #262c41;
+}
 
 .tick text {
   font-size: 14px;
