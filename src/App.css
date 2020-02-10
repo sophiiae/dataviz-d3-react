@@ -1,19 +1,26 @@
 body {
   margin: 0px;
-}
-
-circle {
-  fill: rgb(139, 73, 205);
-  opacity: 0.3;
-}
-
-text {
-  font-family: sans-serif;
+  overflow: hidden;
 }
 
 .tick text {
-  font-size: 2.7em;
+  font-size: 14px;
   fill: #635F5D;
+  font-family: sans-serif;
+}
+
+.tick circle {
+  stroke: black;
+  stroke-opacity: 0.5;
+}
+
+/* circle {
+  fill: rgb(139, 73, 205);
+  opacity: 0.3;
+} */
+
+text {
+  font-family: sans-serif;
 }
 
 .tick line {
@@ -38,13 +45,19 @@ text {
 }
 
 .country {
-  fill: rgb(61, 128, 60);
   stroke: rgb(87, 66, 40);
-  stroke-opacity: 0.1;
+  stroke-width: 0.05px;
+}
+
+.country.highlighted {
+  stroke: rgb(63, 63, 63);
+  stroke-width: 1px;
+  stroke-opacity: 0.4;
 }
 
 .country:hover {
-  fill: rgb(228, 207, 119);
+  opacity: 0.7;
+  stroke-opacity: 1;
 }
 
 .sphere {

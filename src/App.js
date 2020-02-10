@@ -7,7 +7,9 @@ import CustomAxis from './charts/CustomAxis';
 import ScatterChart from './charts/ScatterChart';
 import LineChart from './charts/LineChart';
 import WorldMap from './maps/WorldMap';
-import { Breadcrumbs, MenuList, MenuItem } from '@material-ui/core';
+import ChoroplethMap from './maps/ChoroplethMap'
+import { MenuList, MenuItem } from '@material-ui/core';
+import './App.css'
 
 function App() {
   return (
@@ -29,7 +31,8 @@ function App() {
             <BarChart />
           </Route>
           <Route path="/maps">
-            <WorldMap />
+            {/* <WorldMap /> */}
+            <ChoroplethMap />
           </Route>
         </Switch>
         {/* <Shape /> */}
