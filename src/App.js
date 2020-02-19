@@ -12,7 +12,8 @@ import CustomAxis from './charts/CustomAxis';
 import ScatterChart from './charts/ScatterChart';
 import LineChart from './charts/LineChart';
 import WorldMap from './maps/WorldMap';
-import ChoroplethMap from './maps/ChoroplethMap'
+import ChoroplethMap from './maps/choroplethMap/ChoroplethMap'
+import CirclesOnMap from './maps/circlesOnMap/circlesOnMap'
 import Demo from './rsm/Demo'
 import './App.css'
 
@@ -31,7 +32,12 @@ function App() {
           </Route>
           <Route path="/maps">
             {/* <WorldMap /> */}
-            <ChoroplethMap />
+            {/* <ChoroplethMap /> */}
+            <div className="buttons">
+              <button data-zoom="+1">Zoom in</button>
+              <button data-zoom="-1">Zoom out</button>
+            </div>
+            <CirclesOnMap />
           </Route>
           <Route path="/rsm">
             <Demo />
